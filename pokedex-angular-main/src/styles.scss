@@ -1,0 +1,34 @@
+@import 'config-scss/reset.scss';
+@import 'config-scss/variables.scss';
+@import 'config-scss/rem-calc.scss';
+@import 'config-scss/btn.scss';
+@import 'config-scss/animation.scss';
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background: var(--body);
+  font-family: Inter, Roboto, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+main {
+  width: 100%;
+  max-width: rem-calc(1080);
+  margin: 0 auto;
+  padding: 0 rem-calc(20);
+  box-sizing: border-box;
+}
+
+::selection {
+  color: var(--branco);
+  background: var(--secondary-color);
+}

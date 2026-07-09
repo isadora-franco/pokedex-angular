@@ -1,0 +1,74 @@
+<poke-search
+  [value]="searchTerm"
+  (emmitSearch)="getSearch($event)"
+></poke-search>
+
+<poke-explorer-panel
+  [total]="totalCount"
+  [visible]="getAllPokemons.length"
+  [captured]="capturedCount"
+  [types]="allTypes"
+  [activeType]="activeType"
+  (typeChange)="setTypeFilter($event)"
+  (randomPokemon)="surpriseMe()"
+  (clearFilters)="resetFilters()"
+></poke-explorer-panel>
+
+<section class="loading-grid" *ngIf="isLoading">
+  <div class="skeleton-card" *ngFor="let item of [1,2,3,4,5,6]"></div>
+</section>
+
+<section class="listagem" *ngIf="!isLoading && getAllPokemons.length">
+  <ng-container *ngFor="let pokemon of getAllPokemons; let i = index">
+    <a
+      [routerLink]="['/details', pokemon.status.id]"
+      class="pokemon"
+      *ngIf="pokemon.status"
+      [style.--type-color]="'var(--type-' + pokemon.status.types[0].type.name + ')'"
+      [style.animation-delay]="getCardDelay(i)"
+    >
+      <span class="pokemon__number">#{{ pokemon.status.id | number:'3.0-0' }}</span>
+
+      <button
+        type="button"
+        class="pokemon__capture"
+        [class.active]="isCaptured(pokemon.status.id)"
+        (click)="toggleCaptured($event, pokemon.status.id)"
+        [attr.aria-label]="isCaptured(pokemon.status.id) ? 'Remover dos capturados' : 'Marcar como capturado'"
+      >
+        {{ isCaptured(pokemon.status.id) ? '●' : '○' }}
+      </button>
+
+      <section class="pokemon__status">
+        <h2>{{ pokemon.name }}</h2>
+
+        <ul>
+          <li *ngFor="let value of pokemon.status.types">
+            {{ value.type.name }}
+          </li>
+        </ul>
+      </section>
+
+      <section class="pokemon__image">
+        <img
+          [src]="getPokemonImage(pokemon)"
+          [alt]="pokemon.name"
+        >
+      </section>
+    </a>
+  </ng-container>
+</section>
+
+<poke-empty-state
+  *ngIf="!isLoading && !apiError && !getAllPokemons.length"
+  [searchTerm]="searchTerm"
+  [activeType]="activeType"
+  (clearFilters)="resetFilters()"
+></poke-empty-state>
+
+<img
+  src="assets/error.png"
+  alt="Deu erro na mostragem do pokemon"
+  width="100%"
+  *ngIf="apiError"
+>

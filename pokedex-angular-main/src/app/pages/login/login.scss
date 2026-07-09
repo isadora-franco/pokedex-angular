@@ -1,0 +1,147 @@
+@import '../../../config-scss/rem-calc.scss';
+
+.login {
+
+  min-height: calc(100vh - #{rem-calc(120)});
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: rem-calc(20);
+
+  &__card {
+
+    width: 100%;
+    max-width: rem-calc(430);
+
+    padding: rem-calc(35);
+
+    border-radius: rem-calc(20);
+
+    background: rgba(255,255,255,.08);
+
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    box-shadow: 0 rem-calc(12) rem-calc(40)
+      rgba(0,0,0,.25);
+
+    text-align: center;
+
+  }
+
+  &__logo{
+
+    width: rem-calc(180);
+
+    margin-bottom: rem-calc(20);
+
+  }
+
+  h1{
+
+    color: var(--branco);
+
+    margin-bottom: rem-calc(8);
+
+  }
+
+  p{
+
+    color: rgba(255,255,255,.7);
+
+    margin-bottom: rem-calc(28);
+
+  }
+
+  form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:rem-calc(18);
+
+  }
+
+  label{
+
+    color:var(--branco);
+
+    font-size:.9rem;
+
+    text-align:left;
+
+  }
+
+  input{
+
+    height:rem-calc(48);
+
+    padding:0 rem-calc(16);
+
+    border:none;
+
+    border-radius:rem-calc(12);
+
+    background:rgba(255,255,255,.08);
+
+    color:var(--branco);
+
+    outline:none;
+
+    transition:.2s;
+
+    &::placeholder{
+
+      color:rgba(255,255,255,.45);
+
+    }
+
+    &:focus{
+
+      border:2px solid var(--secondary-color);
+
+    }
+
+  }
+
+  button{
+
+    margin-top:rem-calc(10);
+
+    height:rem-calc(48);
+
+    border:none;
+
+    border-radius:rem-calc(12);
+
+    background:var(--secondary-color);
+
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    &:hover{
+
+      transform:translateY(-2px);
+
+      filter:brightness(1.05);
+
+    }
+
+  }
+
+  .login__error {
+  margin-top: 1rem;
+  color: #ff6b6b;
+  font-size: .9rem;
+}
+
+}

@@ -1,0 +1,399 @@
+@import '../../../config-scss/rem-calc.scss';
+
+:host {
+  display: block;
+}
+
+.details-page {
+  padding-bottom: rem-calc(64);
+}
+
+.detail-shell {
+  --type-color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  gap: rem-calc(22);
+  animation: pageReveal 0.45s ease both;
+}
+
+.detail-hero,
+.info-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 rem-calc(18) rem-calc(46) rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.detail-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr minmax(#{rem-calc(280)}, 0.95fr);
+  gap: rem-calc(26);
+  min-height: rem-calc(420);
+  padding: rem-calc(34);
+  border-radius: rem-calc(34);
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: var(--type-color);
+    pointer-events: none;
+  }
+
+  &::before {
+    width: rem-calc(380);
+    height: rem-calc(380);
+    right: rem-calc(-90);
+    top: rem-calc(-115);
+    opacity: 0.22;
+  }
+
+  &::after {
+    width: rem-calc(160);
+    height: rem-calc(160);
+    left: rem-calc(-55);
+    bottom: rem-calc(-70);
+    opacity: 0.16;
+  }
+
+  &__copy {
+    position: relative;
+    z-index: 2;
+    align-self: center;
+
+    h1 {
+      color: var(--branco);
+      font-size: clamp(3rem, 8vw, 6.9rem);
+      font-style: italic;
+      font-weight: 900;
+      letter-spacing: -0.08em;
+      line-height: 0.82;
+      text-transform: capitalize;
+    }
+
+    p {
+      max-width: rem-calc(560);
+      margin: rem-calc(22) 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: rem-calc(16);
+      line-height: 1.55;
+    }
+  }
+}
+
+.detail-number {
+  display: inline-flex;
+  margin-bottom: rem-calc(14);
+  padding: rem-calc(7) rem-calc(11);
+  border-radius: rem-calc(999);
+  color: var(--primary-color);
+  background: var(--branco);
+  font-size: rem-calc(14);
+  font-weight: 900;
+}
+
+.type-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem-calc(10);
+}
+
+.type-badge {
+  padding: rem-calc(8) rem-calc(14);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: rem-calc(999);
+  color: var(--branco);
+  font-size: rem-calc(13);
+  font-weight: 900;
+  text-transform: capitalize;
+  box-shadow: 0 rem-calc(8) rem-calc(18) rgba(0, 0, 0, 0.14);
+}
+
+.sprite-card {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  min-height: rem-calc(340);
+  padding: rem-calc(28);
+  border-radius: rem-calc(30);
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.36), transparent 54%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14), 0 rem-calc(20) rem-calc(35) rgba(0, 0, 0, 0.18);
+  }
+
+  &--shiny .pokemon-img {
+    filter: drop-shadow(0 0 rem-calc(18) rgba(255, 215, 0, 0.72));
+  }
+
+  &__ring {
+    position: absolute;
+    width: rem-calc(230);
+    height: rem-calc(230);
+    border: rem-calc(18) solid var(--type-color);
+    border-radius: 50%;
+    opacity: 0.18;
+  }
+
+  &__actions {
+    position: relative;
+    z-index: 8;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: rem-calc(10);
+    margin-top: rem-calc(22);
+    pointer-events: auto;
+  }
+}
+
+.pokemon-img {
+  position: relative;
+  z-index: 1;
+  width: min(#{rem-calc(280)}, 88%);
+  max-height: rem-calc(270);
+  object-fit: contain;
+  animation: spriteFloat 3.4s ease-in-out infinite;
+  filter: drop-shadow(0 rem-calc(18) rem-calc(18) rgba(0, 0, 0, 0.26));
+}
+
+.mini-button,
+.hero-nav {
+  border: 0;
+  color: var(--primary-color);
+  background: var(--branco);
+  font-family: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(rem-calc(-2));
+  }
+}
+
+.mini-button {
+  position: relative;
+  z-index: 9;
+  min-width: rem-calc(116);
+  padding: rem-calc(10) rem-calc(14);
+  border-radius: rem-calc(999);
+  font-size: rem-calc(13);
+  pointer-events: auto;
+
+  &:focus-visible {
+    outline: rem-calc(3) solid rgba(255, 255, 255, 0.4);
+    outline-offset: rem-calc(3);
+  }
+
+  &--capture.active {
+    color: var(--branco);
+    background: var(--type-color);
+  }
+}
+
+.hero-nav {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  width: rem-calc(42);
+  height: rem-calc(42);
+  border-radius: 50%;
+  font-size: rem-calc(34);
+  line-height: rem-calc(20);
+
+  &:disabled {
+    opacity: 0.22;
+    cursor: not-allowed;
+  }
+
+  &--left {
+    left: rem-calc(18);
+  }
+
+  &--right {
+    right: rem-calc(18);
+  }
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: rem-calc(22);
+}
+
+.info-card {
+  padding: rem-calc(26);
+  border-radius: rem-calc(28);
+  color: var(--branco);
+  animation: cardReveal 0.55s ease both;
+
+  h2 {
+    margin: rem-calc(8) 0 rem-calc(20);
+    font-size: rem-calc(28);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+  }
+}
+
+.card-label {
+  color: var(--type-color);
+  font-size: rem-calc(12);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: rem-calc(12);
+
+  div {
+    min-height: rem-calc(78);
+    padding: rem-calc(14);
+    border-radius: rem-calc(18);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  span {
+    display: block;
+    margin-bottom: rem-calc(8);
+    color: rgba(255, 255, 255, 0.58);
+    font-size: rem-calc(12);
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  strong {
+    color: var(--branco);
+    font-size: rem-calc(16);
+    font-weight: 900;
+    line-height: 1.25;
+    text-transform: capitalize;
+  }
+}
+
+.stat__row {
+  display: grid;
+  grid-template-columns: rem-calc(110) 1fr rem-calc(42);
+  align-items: center;
+  gap: rem-calc(14);
+  margin-bottom: rem-calc(13);
+}
+
+.stat__name {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: rem-calc(13);
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.stat__bar-bg {
+  height: rem-calc(10);
+  border-radius: rem-calc(999);
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.stat__bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--type-color), rgba(255, 255, 255, 0.86));
+  animation: growBar 0.9s ease both;
+}
+
+.stat__number {
+  color: var(--branco);
+  font-size: rem-calc(14);
+  font-weight: 900;
+  text-align: right;
+}
+
+.back-button {
+  align-self: center;
+  width: auto;
+  min-width: rem-calc(210);
+}
+
+@keyframes pageReveal {
+  from {
+    opacity: 0;
+    transform: translateY(rem-calc(16));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(rem-calc(14));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spriteFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(rem-calc(-12)) rotate(1deg);
+  }
+}
+
+@keyframes growBar {
+  from {
+    width: 0;
+  }
+}
+
+@media (max-width: 860px) {
+  .detail-hero,
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-hero {
+    min-height: 0;
+    padding: rem-calc(28);
+  }
+}
+
+@media (max-width: 520px) {
+  .detail-hero,
+  .info-card {
+    border-radius: rem-calc(24);
+  }
+
+  .about-grid,
+  .stat__row {
+    grid-template-columns: 1fr;
+  }
+
+  .stat__number {
+    text-align: left;
+  }
+
+  .hero-nav {
+    top: rem-calc(22);
+  }
+}

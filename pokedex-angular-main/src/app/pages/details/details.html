@@ -1,0 +1,127 @@
+<poke-header></poke-header>
+
+<main class="details-page">
+  <section
+    class="detail-shell"
+    *ngIf="isLoading"
+    [style.--type-color]="getPokemonColor()"
+  >
+    <section class="detail-hero">
+      <button
+        type="button"
+        class="hero-nav hero-nav--left"
+        (click)="goToPokemon(-1)"
+        [disabled]="pokemonId <= 1"
+        aria-label="Pokémon anterior"
+      >
+        ‹
+      </button>
+
+      <div class="detail-hero__copy">
+        <span class="detail-number">#{{ pokemonId | number:'3.0-0' }}</span>
+        <h1>{{ pokemonData.name }}</h1>
+        <p>{{ flavorText }}</p>
+
+        <div class="type-row">
+          <span
+            class="type-badge"
+            *ngFor="let t of pokemonTypes"
+            [style.background]="'var(--type-' + t.type.name + ')'"
+          >
+            {{ t.type.name }}
+          </span>
+        </div>
+      </div>
+
+      <div class="sprite-card" [class.sprite-card--shiny]="isShiny">
+        <span class="sprite-card__ring"></span>
+        <img
+          [src]="pokemonSprite"
+          [alt]="pokemonData.name"
+          class="pokemon-img"
+        >
+
+        <div class="sprite-card__actions">
+          <button type="button" class="mini-button" (click)="toggleShiny()">
+            {{ isShiny ? 'Versão normal' : 'Ver shiny' }}
+          </button>
+          <button
+            type="button"
+            class="mini-button mini-button--capture"
+            [class.active]="isCaptured"
+            (click)="toggleCaptured()"
+          >
+            {{ isCaptured ? 'Capturado' : 'Capturar' }}
+          </button>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="hero-nav hero-nav--right"
+        (click)="goToPokemon(1)"
+        [disabled]="pokemonId >= 151"
+        aria-label="Próximo Pokémon"
+      >
+        ›
+      </button>
+    </section>
+
+    <section class="detail-grid">
+      <article class="info-card info-card--about">
+        <span class="card-label">Ficha rápida</span>
+        <h2>Informações</h2>
+
+        <div class="about-grid">
+          <div>
+            <span>Altura</span>
+            <strong>{{ formattedHeight }}</strong>
+          </div>
+          <div>
+            <span>Peso</span>
+            <strong>{{ formattedWeight }}</strong>
+          </div>
+          <div>
+            <span>Base XP</span>
+            <strong>{{ pokemonData.base_experience || '-' }}</strong>
+          </div>
+          <div>
+            <span>Habilidades</span>
+            <strong>{{ pokemonAbilities }}</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="info-card info-card--stats">
+        <span class="card-label">Análise de batalha</span>
+        <h2>Estatísticas</h2>
+
+        <div class="stats__container">
+          <div class="stat__row" *ngFor="let value of pokemonStats">
+            <span class="stat__name">{{ formatStatName(value.stat.name) }}</span>
+
+            <div class="stat__bar-bg">
+              <div
+                class="stat__bar-fill"
+                [style.width.%]="getStatPercent(value.base_stat)"
+              ></div>
+            </div>
+
+            <span class="stat__number">{{ value.base_stat }}</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <a [routerLink]="['/home']" class="btn btn__secondary back-button">
+      Voltar para lista
+    </a>
+  </section>
+
+  <img
+    src="assets/error.png"
+    alt="Deu erro na mostragem do Pokémon"
+    width="100%"
+    *ngIf="apiError"
+  >
+</main>

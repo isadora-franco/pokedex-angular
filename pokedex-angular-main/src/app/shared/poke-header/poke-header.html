@@ -1,0 +1,11 @@
+<header>
+  <a [routerLink]="['/home']" class="brand" aria-label="Voltar para a Pokédex">
+    <img src="assets/logo.svg" alt="Logo Pokédex">
+  </a>
+    <button type="button" (click)="toggle()" class="theme-btn">
+        <img
+          src="./assets/{{ icon }}.svg"
+          alt="Cliqui aqui e mude para {{textTheme}}"
+        />
+    </button>
+</header>

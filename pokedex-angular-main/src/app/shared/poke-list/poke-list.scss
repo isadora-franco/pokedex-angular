@@ -1,0 +1,209 @@
+@import '../../../config-scss/rem-calc.scss';
+
+$padding: rem-calc(18);
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.listagem,
+.loading-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: rem-calc(18);
+  padding: rem-calc(10) 0 rem-calc(60);
+}
+
+.pokemon {
+  --type-color: var(--secondary-color);
+  position: relative;
+  min-height: rem-calc(156);
+  padding: $padding;
+  border: 1px solid rgba(255, 255, 255, 0.74);
+  border-radius: rem-calc(24);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.9)),
+    var(--type-color);
+  color: var(--primary-color);
+  text-decoration: none;
+  overflow: hidden;
+  box-shadow: 0 rem-calc(16) rem-calc(30) rgba(0, 0, 0, 0.12);
+  animation: cardUp 0.58s ease both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: rem-calc(12) auto rem-calc(12) rem-calc(12);
+    width: rem-calc(6);
+    border-radius: rem-calc(99);
+    background: var(--type-color);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: rem-calc(-30);
+    bottom: rem-calc(-54);
+    width: rem-calc(155);
+    height: rem-calc(155);
+    border-radius: 50%;
+    background: var(--type-color);
+    opacity: 0.12;
+  }
+
+  &:hover {
+    transform: translateY(rem-calc(-8));
+    border-color: var(--type-color);
+    box-shadow: 0 rem-calc(22) rem-calc(38) rgba(0, 0, 0, 0.18);
+
+    .pokemon__image img {
+      transform: translateY(rem-calc(-8)) scale(1.1) rotate(2deg);
+    }
+  }
+
+  &__number {
+    position: absolute;
+    right: rem-calc(16);
+    top: rem-calc(14);
+    color: rgba(38, 40, 53, 0.18);
+    font-size: rem-calc(28);
+    font-weight: 900;
+  }
+
+  &__capture {
+    position: absolute;
+    z-index: 4;
+    top: rem-calc(14);
+    left: rem-calc(18);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: rem-calc(28);
+    height: rem-calc(28);
+    border: 1px solid rgba(38, 40, 53, 0.12);
+    border-radius: 50%;
+    color: var(--type-color);
+    background: rgba(255, 255, 255, 0.76);
+    font-size: rem-calc(18);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+
+    &:hover {
+      transform: scale(1.08);
+    }
+
+    &.active {
+      color: var(--branco);
+      background: var(--type-color);
+    }
+  }
+
+  &__status {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: rem-calc(118);
+    padding-left: rem-calc(10);
+
+    h2 {
+      max-width: 60%;
+      margin-bottom: rem-calc(12);
+      font-size: rem-calc(24);
+      font-style: italic;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      text-transform: capitalize;
+      line-height: 0.95;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: rem-calc(6);
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: rem-calc(68);
+      height: rem-calc(23);
+      padding: 0 rem-calc(10);
+      border-radius: rem-calc(50);
+      background: rgba(38, 40, 53, 0.07);
+      color: rgba(38, 40, 53, 0.74);
+      font-size: rem-calc(12);
+      font-weight: 800;
+      text-transform: capitalize;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    z-index: 3;
+    right: rem-calc(4);
+    bottom: rem-calc(8);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 45%;
+    height: 72%;
+    pointer-events: none;
+
+    img {
+      width: min(100%, #{rem-calc(118)});
+      max-height: rem-calc(126);
+      object-fit: contain;
+      filter: drop-shadow(0 rem-calc(12) rem-calc(12) rgba(0, 0, 0, 0.18));
+      transition: transform 0.25s ease;
+    }
+  }
+}
+
+.skeleton-card {
+  min-height: rem-calc(156);
+  border-radius: rem-calc(24);
+  background: linear-gradient(100deg, rgba(255,255,255,0.05), rgba(255,255,255,0.13), rgba(255,255,255,0.05));
+  background-size: 200% 100%;
+  animation: loadingPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes cardUp {
+  from {
+    opacity: 0;
+    transform: translateY(rem-calc(18));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes loadingPulse {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+@media (max-width: 1040px) {
+  .listagem,
+  .loading-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .listagem,
+  .loading-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pokemon {
+    min-height: rem-calc(150);
+  }
+}

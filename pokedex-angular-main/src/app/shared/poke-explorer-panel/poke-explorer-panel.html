@@ -1,0 +1,41 @@
+<section class="explorer-panel">
+  <div class="explorer-panel__text">
+    <h1>Encontre seus pokémons aqui!</h1>
+    <p>
+      {{ visible }} de {{ total }} Pokémon no radar
+      <span aria-hidden="true">•</span>
+      {{ captured }} capturado{{ captured === 1 ? '' : 's' }}
+    </p>
+  </div>
+
+  <div class="explorer-panel__actions">
+    <button type="button" class="action action--primary" (click)="surprise()">
+      Sortear Pokémon
+    </button>
+    <button type="button" class="action action--ghost" (click)="clear()">
+      Limpar filtros
+    </button>
+  </div>
+
+  <div class="type-filter" aria-label="Filtrar Pokémon por tipo">
+    <button
+      type="button"
+      class="type-filter__chip"
+      [class.active]="activeType === 'all'"
+      (click)="selectType('all')"
+    >
+      Todos
+    </button>
+
+    <button
+      type="button"
+      class="type-filter__chip"
+      *ngFor="let type of types"
+      [class.active]="activeType === type"
+      [style.border-color]="'var(--type-' + type + ')'"
+      (click)="selectType(type)"
+    >
+      {{ type }}
+    </button>
+  </div>
+</section>

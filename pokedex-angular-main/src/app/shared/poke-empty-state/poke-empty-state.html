@@ -1,0 +1,10 @@
+<section class="empty-state">
+  <div class="empty-state__icon">?</div>
+  <h2>Nenhum Pokémon encontrado</h2>
+  <p>
+    A busca por <strong *ngIf="searchTerm">“{{ searchTerm }}”</strong>
+    <span *ngIf="!searchTerm">esse filtro</span>
+    não encontrou resultados<span *ngIf="activeType !== 'all'"> do tipo {{ activeType }}</span>.
+  </p>
+  <button type="button" (click)="clear()">Mostrar todos novamente</button>
+</section>

@@ -1,0 +1,13 @@
+<form (submit)="$event.preventDefault()">
+  <label for="pokemon-search">Buscar Pokémon</label>
+  <input
+    id="pokemon-search"
+    type="text"
+    #input
+    [value]="value"
+    (input)="search(input.value)"
+    placeholder="Digite nome ou parte do nome..."
+    autocomplete="off"
+  >
+  <img src="assets/icons/search.svg" alt="">
+</form>

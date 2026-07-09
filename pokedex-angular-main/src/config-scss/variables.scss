@@ -1,0 +1,73 @@
+:root {
+    --branco: #fff;
+    --cinza: #efefef;
+
+    --primary-color: #262835;
+    --secondary-color: #ff5473;
+
+    --body: #252735;
+
+    --filter-bg: rgba(255, 255, 255, 0.07);
+    --filter-border: rgba(255, 255, 255, 0.14);
+    --filter-text: rgba(255, 255, 255, 0.88);
+
+    --filter-active-bg: var(--branco);
+    --filter-active-text: var(--primary-color);
+
+    --type-normal: #A8A77A;
+  --type-fire: #EE8130;
+  --type-water: #6390F0;
+  --type-electric: #F7D02C;
+  --type-grass: #7AC74C;
+  --type-ice: #96D9D6;
+  --type-fighting: #C22E28;
+  --type-poison: #A33EA1;
+  --type-ground: #E2BF65;
+  --type-flying: #A98FF3;
+  --type-psychic: #F95587;
+  --type-bug: #A6B91A;
+  --type-rock: #B6A136;
+  --type-ghost: #735797;
+  --type-dragon: #6F35FC;
+  --type-steel: #B7B7CE;
+  --type-fairy: #D685AD;
+}
+
+body.light-theme{
+    --branco: #ffffff;
+    --cinza: #3b3b3b;
+
+    --primary-color: #3f445c;
+    --secondary-color: #9b3144;
+
+    --body:#8792c4;
+
+    --filter-bg: #f2f2f2;
+    --filter-border: #d6d6d6;
+    --filter-text: #3f445c;
+
+    --filter-active-bg: var(--secondary-color);
+    --filter-active-text: white;
+
+    --type-normal: #A8A77A;
+  --type-fire: #EE8130;
+  --type-water: #6390F0;
+  --type-electric: #F7D02C;
+  --type-grass: #7AC74C;
+  --type-ice: #96D9D6;
+  --type-fighting: #C22E28;
+  --type-poison: #A33EA1;
+  --type-ground: #E2BF65;
+  --type-flying: #A98FF3;
+  --type-psychic: #F95587;
+  --type-bug: #A6B91A;
+  --type-rock: #B6A136;
+  --type-ghost: #735797;
+  --type-dragon: #6F35FC;
+  --type-steel: #B7B7CE;
+  --type-fairy: #D685AD;
+}
+
+$pokedex-red: #dc0a2d;
+$pokedex-dark: #232323;
+$pokedex-screen: #dedede;
